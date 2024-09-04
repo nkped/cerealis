@@ -4,10 +4,15 @@ import mongoose from 'mongoose';
 
 const app = express();
 
-app.get('/', (request, reponse) => {
-    console.log(request)
-    return reponse.status(234).send('Wellcome to my mern app')
+app.get('/', (req, res) => {
+    console.log(req)
+    return res.status(200).send('Wellcome to my mern ap')
 })  
+
+app.post('/', (req, res) => {
+    res.send('got a post req...')
+    return res.status(200).send('Wellcome to my mern app')
+})
 
 
 mongoose
@@ -20,6 +25,9 @@ mongoose
 }).catch((error) => {
     console.error(error)
 })
+
+
+
 
 
 
