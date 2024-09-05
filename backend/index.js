@@ -11,7 +11,19 @@ app.use(express.json())
 app.get('/', (req, res) => {
     console.log(req)
     return res.status(200).send('Wellcome to my mern ap')
-})  
+})
+
+
+app.get('/cereals', async (req, res) => {
+    console.log('get all from db requested')
+
+    const data = await Cereal.find({})
+
+    return res.status(200).json(data)
+})
+
+
+
 
 app.post('/cereals', async (req, res) => {
 
