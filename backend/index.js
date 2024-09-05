@@ -7,13 +7,13 @@ const app = express();
 
 app.use(express.json())
 
-
+//get home page
 app.get('/', (req, res) => {
     console.log(req)
     return res.status(200).send('Wellcome to my mern ap')
 })
 
-
+//get all cereal
 app.get('/cereals', async (req, res) => {
     console.log('get all from db requested')
 
@@ -22,8 +22,16 @@ app.get('/cereals', async (req, res) => {
     return res.status(200).json(data)
 })
 
+//get cereal by id
+app.get('/cereals/:id', async (req, res) => {
+    console.log('get by id from db requested')
 
+    const { id } = req.params
 
+    const cereal = await Cereal.findById(id)
+
+    return res.status(200).json(cereal)
+})
 
 app.post('/cereals', async (req, res) => {
 
