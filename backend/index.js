@@ -27,31 +27,14 @@ app.get('/cereals', async (req, res) => {
 
 app.post('/cereals', async (req, res) => {
 
+    const { title } = req.body
     try {
-        if (
-            !req.body.title || 
-            !req.body.publishYear
-        ) {
-            return res.status(400).send({message: 'please send all required fields'})
-        }
-        const newCereal = {
-            title: req.body.title,
-            publishYear: req.body.publishYear
-        }
+        const cereal = await Cereal.create({ title })
+        res.status(200).json(cereal)
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }})
 
-        const cereal = await Cereal(newCereal) 
-        
-        return res.status(201).send(cereal)
-
-    } catch (err) {
-        console.error(err)
-        res.status(500).send({message: err.message})        
-    }
-
-
-    res.send('got a post req...')
-    return res.status(200).send('Wellcome to my mern app')
-})
 
 
 mongoose

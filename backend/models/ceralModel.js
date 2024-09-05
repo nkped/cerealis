@@ -8,14 +8,7 @@ const cerealSchema = Schema(
         title: {
             type: String,
             required: true
-        },
-        publishYear: {
-            type: Number,
-            required: true
         }
-    },
-    {
-        timestamps: true
     }
 )
 
