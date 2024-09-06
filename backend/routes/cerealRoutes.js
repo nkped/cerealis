@@ -62,10 +62,16 @@ router.put('/:id', async (req,res) => {
 
 //delete one cereal
 router.delete('/:id', async (req,res) => {
-    const { id } = req.params
-    const cereal = await Cereal.findByIdAndDelete(id)    
-
-    return res.status(200).send({message: 'cereal was deleted'})
+    try {
+        const { id } = req.params
+        const cereal = await Cereal.findByIdAndDelete(id)        
+        if(!cereal) {
+            return res.status(404).send({message: `Cereal with id of ${id} not found`})
+        }    
+        return res.status(200).send({message: `Cereal with id of ${id} was deleted`})
+    } catch (error) {
+        
+    }
 })
 
 
