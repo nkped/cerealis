@@ -10,38 +10,23 @@ const router = express.Router()
 router.get('/', async (req, res) => {
     try {
         const cereals = await Cereal.find({})
-        return res.status(200).send(cereals)
+        //consider sending {count: cereals.length, data: cereals}
+        return res.status(200).json(cereals)
     } catch (error) {
-        res.status(400). send({message: error.message})        
+        res.status(400).send({message: error.message})        
     }
 })
 
 
-
-//get cereal by id
-/* 
-  UNDER CONSTRUCTION
+//get one cereal by id
 router.get('/:id', async (req, res) => {
    try {
     const { id } = req.params
     const cereal = await Cereal.findById(id)
-
     return res.status(200).json(cereal)    
    } catch (error) {
     res.status(400).send({message: `Cereal with id of ${id} not found`})
-   }
-
-    
-}) */
-
-router.get('/:id', async (req, res) => {
-    console.log('get by id from db requested')
-
-    const { id } = req.params
-
-    const cereal = await Cereal.findById(id)
-
-    return res.status(200).json(cereal)
+   }    
 })
 
 //post one cereal
@@ -49,7 +34,7 @@ router.post('/', async (req, res) => {
     try {
         const { title } = req.body
         if (!title) {
-        return res.status(400).send({message: 'please provide all requested field'})
+        return res.status(400).send({message: 'please provide all requested fields'})
         }
         //create cereal obj
         const cereal = await Cereal.create({ title })
@@ -61,12 +46,19 @@ router.post('/', async (req, res) => {
 
 //update new cereal
 router.put('/:id', async (req,res) => {
-    const { id } = req.params
-    const result = await Cereal.findByIdAndUpdate(id, req.body)
-
-    return res.status(200).send({message: 'was updated'})
+    try {
+        const { id } = req.params        
+        if (!req.body.title) {
+            return res.status(400).send({message: 'please provide all requested fields'})
+        }
+        const result = await Cereal.findByIdAndUpdate(id, req.body)             
+        return res.status(200).send({message: 'was updated'})
+    } catch (error) {
+        res.status(500).send({message: error.message})
+    }
 
 })
+
 
 //delete one cereal
 router.delete('/:id', async (req,res) => {
