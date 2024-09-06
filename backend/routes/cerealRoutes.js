@@ -8,10 +8,15 @@ const router = express.Router()
 
 //get all cereals
 router.get('/', async (req, res) => {
-    const data = await Cereal.find({})
-
-    return res.status(200).json(data)
+    try {
+        const cereals = await Cereal.find({})
+        return res.status(200).send(cereals)
+    } catch (error) {
+        res.status(400). send({message: error.message})        
+    }
 })
+
+
 
 //get cereal by id
 /* 
