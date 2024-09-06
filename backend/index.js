@@ -43,12 +43,18 @@ app.post('/cereals', async (req, res) => {
         res.status(400).json({error: error.message})
     }})
 
+app.put('/cereals/:id', async (req,res) => {
+    const { id } = req.params
+    const result = await Cereal.findByIdAndUpdate(id, req.body)
+
+    return res.status(200).send({message: 'was updated'})
+
+})
+
 //delete one cereal
 app.delete('/cereals/:id', async (req,res) => {
     const { id } = req.params
-    const cereal = await Cereal.findByIdAndDelete(id)
-
-    
+    const cereal = await Cereal.findByIdAndDelete(id)    
 
     return res.status(200).send({message: 'cereal was deleted'})
 })
