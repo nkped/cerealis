@@ -3,19 +3,21 @@ import { PORT, mongoDBURL } from './config.js'
 import mongoose from 'mongoose';
 import cerealRoutes from './routes/cerealRoutes.js';
 
+//server-instance
 const app = express();
 
+//middleware
 app.use(express.json())
+app.use('/cereals', cerealRoutes)
 
-//get home page
+//home page-route
 app.get('/', (req, res) => {
     console.log(req)
     return res.status(200).send('Wellcome to my mern ap')
 })
 
-app.use('/cereals', cerealRoutes)
 
-
+//Connect to db and spin up server
 mongoose
 .connect(mongoDBURL)
 .then(() => {

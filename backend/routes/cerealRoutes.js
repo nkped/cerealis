@@ -3,8 +3,7 @@ import { Cereal } from '../models/ceralModel.js'
 
 const router = express.Router()
 
-
-//get all cereal
+//get all cereals
 router.get('/', async (req, res) => {
     console.log('get all from db requested')
 
@@ -24,6 +23,7 @@ router.get('/:id', async (req, res) => {
     return res.status(200).json(cereal)
 })
 
+//post one cereal
 router.post('/', async (req, res) => {
 
     const { title } = req.body
@@ -34,6 +34,7 @@ router.post('/', async (req, res) => {
         res.status(400).json({error: error.message})
     }})
 
+//update new cereal
 router.put('/:id', async (req,res) => {
     const { id } = req.params
     const result = await Cereal.findByIdAndUpdate(id, req.body)
