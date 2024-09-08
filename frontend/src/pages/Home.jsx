@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Spinner from '..components/Spinner.jsx';
+//import Spinner from '..components/Spinner.jsx';
+import OtherSpinner from '../components/OtherSpinner';
 import { Link } from 'react-router-dom';
 import { AiOutlineEdit } from 'react-icons/ai'
 import { BsInfoCircle } from 'react-icons/bs'
@@ -17,14 +18,15 @@ const Home = () => {
     axios
     .get('http://localhost:5555/cereals')
     .then((response) => {
+      //console.log('database has been called..')
       setCereals(response.data.data)
       setLoading(false)
     })
-  }, [])
-  .catch((err) => {
+    .catch((err) => {
     console.log(err)
     setLoading(false)
   }) 
+}, []) 
 
 //come back here to rewrite after creating database, ts: 30:40
   return (
@@ -33,7 +35,7 @@ const Home = () => {
         <h1 className='text-3xl my-8'>Cereal List</h1>
         <Link to='cereals/create'><MdOutlineAddBox className='text-sky-800 text-4xl' /></Link>
       </div>
-      {loading ? ( <Spinner /> ) : (
+      {loading ?   ( <OtherSpinner /> ) : (
         <table className='w-full border-seperate border-spacing-2'>
           <thead>
             <tr>
