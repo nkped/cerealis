@@ -8,8 +8,6 @@ import ShowCereal from './pages/ShowCereal.jsx';
 import ShowAllCereals from './pages/ShowAllCereals.jsx';
 
 
-
-
 const App = () => {
   return (
     <Routes>

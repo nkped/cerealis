@@ -10,8 +10,8 @@ const router = express.Router()
 router.get('/', async (req, res) => {
     try {
         const cereals = await Cereal.find({})
-        //consider sending {count: cereals.length, data: cereals}
-        return res.status(200).json(cereals)
+        //consider sending cereals
+        return res.status(200).json({count: cereals.length, data: cereals})
     } catch (error) {
         res.status(400).send({message: error.message})        
     }

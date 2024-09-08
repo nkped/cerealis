@@ -18,7 +18,7 @@ app.use(cors())
     allowedHeaders: ['Conten-Type']
 })) */
 
-
+//base-path for ceral routes is '/cereals'
 app.use('/cereals', cerealRoutes)
 
 //home page-route
