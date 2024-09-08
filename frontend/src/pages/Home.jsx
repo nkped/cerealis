@@ -53,7 +53,7 @@ const Home = () => {
                 </td>
                 <td className='border border-slate-700 rounded-md text-center'>
                   <div className='flex justify-center gap-x-4'>
-                    <Link to={`/cereals/${cereal._id}`} >
+                    <Link to={`/cereals/details/${cereal._id}`} >
                       <BsInfoCircle className='text-2x-xl text-green-800'/>
                     </Link>
                     <Link to={`/cereals/edit/${cereal._id}`} >
