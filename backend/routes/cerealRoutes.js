@@ -4,9 +4,9 @@ import { Cereal } from '../models/ceralModel.js'
 const router = express.Router()
 
 
-//all paths are 'predefined with "cereal" i express-router middleware
+//all paths are 'predefined with "/cereals" in express-router middleware
 
-//get all cereals
+//get all cereals (Home)
 router.get('/', async (req, res) => {
     try {
         const cereals = await Cereal.find({})
@@ -17,17 +17,6 @@ router.get('/', async (req, res) => {
     }
 })
 
-
-//get one cereal by id
-router.get('/:id', async (req, res) => {
-   try {
-    const { id } = req.params
-    const cereal = await Cereal.findById(id)
-    return res.status(200).json(cereal)    
-   } catch (error) {
-    res.status(400).send({message: `Cereal with id of ${id} not found`})
-   }    
-})
 
 //post one cereal
 router.post('/', async (req, res) => {
@@ -43,6 +32,19 @@ router.post('/', async (req, res) => {
         res.status(400).json({error: error.message})
     }
 })
+
+
+//get one cereal by id
+router.get('/:id', async (req, res) => {
+   try {
+    const { id } = req.params
+    const cereal = await Cereal.findById(id)
+    return res.status(200).json(cereal)    
+   } catch (error) {
+    res.status(400).send({message: `Cereal with id of ${id} not found`})
+   }    
+})
+
 
 //update new cereal
 router.put('/:id', async (req,res) => {

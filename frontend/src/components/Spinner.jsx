@@ -5,7 +5,7 @@ import React from 'react'
 
 const Spinner = () => {
   return (
-    <div className=' bg-sky-600'>spinner</div>
+    <div className='bg-sky-600'>spinner</div>
   )
 }
 
