@@ -9,7 +9,7 @@ const cerealSchema = Schema(
             type: String,
             required: true
         }
-    }
+    }, { collection: 'cerealCollection'}
 )
 
 
