@@ -8,7 +8,7 @@ import OtherSpinner from '../components/OtherSpinner'
 // ts 3846 for cereal timestamp
 const CerealDetails = () => {
   const [ cereal, setCereal ] = useState({})
-  const [ imagePath, setImagePath ] = useState('')
+  const [ imagePath, setImagePath ] = useState()
   const [ loading, setLoading ] = useState(false)
   const { id } = useParams()
 
@@ -27,7 +27,8 @@ const CerealDetails = () => {
   }, []);
 
   useEffect(() => {
-    setImagePath(encodeURI("/Cereal Pictures" + cereal.name + ".jpg"))
+    setImagePath(encodeURI("/cerealPictures/" + cereal.name + ".jpg"))
+    console.log('imagePath: ',imagePath)
   }, [cereal])
 
   return (
@@ -41,9 +42,9 @@ const CerealDetails = () => {
             <span>{cereal._id}</span>
           </div>
           <div className='my-4'>
-            <span className='mr-4 text-xl text-gray-500'>Title</span>
+            <span className='mr-4 text-xl text-gray-500'>Name</span>
             <span>{cereal.name}</span>
-            <span className='mr-4 text-xl text-gray-500'>Title</span>
+            <span className='mr-4 text-xl text-gray-500'></span>
             <span><img src={imagePath} alt='Cereal image' /></span>
           </div>
         </div>
